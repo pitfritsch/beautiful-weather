@@ -6,7 +6,7 @@ body {
   font-weight: 100;
 }
 
-a,p,h1,h2,h3,h4,h5,span {
+a, p, h1, h2, h3, h4, h5, span, input {
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 100;
 }
