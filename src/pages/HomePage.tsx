@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo } from 'react'
 import { WiCloud, WiCloudy, WiDayCloudy, WiDayShowers, WiDaySunny, WiNightClear, WiNightCloudy, WiNightShowers, WiRainMix, WiSnow, WiThunderstorm } from "react-icons/wi";
-import { MdPlace } from "react-icons/md";
+import { MdClear, MdPlace } from "react-icons/md";
 import { useEffect } from 'react';
 import { useState } from 'react';
 import useWeather, { IReturn } from '../hooks/useWeather';
 import styled from '@emotion/styled';
-import { Box, Flex, Input } from '@chakra-ui/react';
+import { Box, Button, Flex, IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 
 
@@ -174,19 +174,28 @@ function HomePage() {
         background='linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255,255,255,0.15) 100%)'
         pointerEvents='none'
       />
-      <Input
-        variant="flushed"
-        color='white'
-        placeholder="Search any city"
-        size="lg"
+      <InputGroup
+        size="md"
         top='0'
         position='absolute'
-        fontSize='30px'
-        height='auto'
-        padding='10px'
-        value={city}
-        onChange={handleChangeCity}
-      />
+      >
+        <Input
+          variant="flushed"
+          color='white'
+          placeholder="Search any city"
+          size="lg"
+          fontSize='30px'
+          height='auto'
+          padding='10px'
+          value={city}
+          onChange={handleChangeCity}
+        />
+        {city && 
+          <InputRightElement fontSize='10em' color='white' margin='10px' cursor='pointer' onClick={() => setCity('')}>
+            <MdClear />
+          </InputRightElement>
+        }
+      </InputGroup>
       {weather &&
         <>
           <Flex fontSize='10em' color='white'>
