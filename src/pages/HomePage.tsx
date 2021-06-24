@@ -34,9 +34,9 @@ const weatherToIcon: {
   { iconName: "50n", icon: <WiDaySunny /> },
 ]
 
-const Container = styled.div<{ background?: string }>`
+const Container = styled.div<{ height: number, background?: string }>`
   width: 100vw;
-  height: 100vh;
+  height: ${p => p.height}px;
   position: absolute;
   inset: 0;
   display: flex;
@@ -165,6 +165,7 @@ function HomePage() {
 
   return (
     <Container
+      height={window.innerHeight}
       background={background}
     >
       <Box
@@ -176,7 +177,8 @@ function HomePage() {
       />
       <Input
         variant="flushed"
-        placeholder="Search any city you want"
+        color='white'
+        placeholder="Search any city"
         size="lg"
         top='0'
         position='absolute'
