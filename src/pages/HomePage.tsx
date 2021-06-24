@@ -34,9 +34,9 @@ const weatherToIcon: {
   { iconName: "50n", icon: <WiDaySunny /> },
 ]
 
-const Container = styled.div<{ height: number, background?: string }>`
+const Container = styled.div<{ background?: string }>`
   width: 100vw;
-  height: ${p => p.height}px;
+  height: 100vh;
   position: absolute;
   inset: 0;
   display: flex;
@@ -165,7 +165,6 @@ function HomePage() {
 
   return (
     <Container
-      height={window.innerHeight}
       background={background}
     >
       <Box
