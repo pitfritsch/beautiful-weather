@@ -5,7 +5,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import useWeather, { IReturn } from '../hooks/useWeather';
 import styled from '@emotion/styled';
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
+import { css } from '@emotion/react';
 
 
 const weatherToIcon: {
@@ -33,7 +34,7 @@ const weatherToIcon: {
   { iconName: "50n", icon: <WiDaySunny /> },
 ]
 
-const Container = styled.div`
+const Container = styled.div<{ background?: string }>`
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -42,9 +43,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition: background 1s;
 
   background: rgb(6,0,103);
-  background: linear-gradient(to left top, rgba(6,0,103,1) 0%, rgba(0,0,152,1) 50%, rgba(0,0,215,1) 100%);
+  ${p => p.background && css`
+    background: ${p.background};
+  `}
 `
 
 const Temperature = styled.h4`
@@ -57,12 +61,13 @@ function HomePage() {
   const { getWeatherByCityName } = useWeather()
 
   const apiKey = useMemo<string>(() => '427dfea58a376addcf4c40de09f83f45', [])
-  const city = useMemo<string>(() => 'novo hamburgo', [])
+  const city = useMemo<string>(() => 'dubai', [])
 
   const [ weather, setWeather ] = useState<IReturn>()
   const [ weatherIcon, setWeatherIcon ] = useState<string>()
   const [ temperature, setTemperature ] = useState<number>()
   const [ cityName, setCityName ] = useState<string>()
+  const [ background, setBackground ] = useState<string>('#232394')
   
   useEffect(() => {
     console.log({ weather })
@@ -70,6 +75,70 @@ function HomePage() {
     setTemperature(weather?.main.temp)
     setCityName(`${weather?.name} - ${weather?.sys.country}`)
   }, [weather])
+
+  useEffect(() => {
+    let color: string = ''
+    switch (weatherIcon) {
+      case '01d':
+        color = '#3780fd'
+        break;
+      case '02d':
+        color = '#609bff'
+        break;
+      case '03d':
+        color = '#8ab5ff'
+        break;
+      case '04d':
+        color = '#6c8abd'
+        break;
+      case '09d':
+        color = '#384f77'
+        break;
+      case '10d':
+        color = '#3d6ab9'
+        break;
+      case '11d':
+        color = '#1b2e50'
+        break;
+      case '13d':
+        color = '#accaff'
+        break;
+      case '50d':
+        color = '#92a1bb'
+        break;
+      case '01n':
+        color = '#061e48'
+        break;
+      case '02n':
+        color = '#192d50'
+        break;
+      case '03n':
+        color = '#2e3e5a'
+        break;
+      case '04n':
+        color = '#2e394c'
+        break;
+      case '09n':
+        color = '#1f2838'
+        break;
+      case '10n':
+        color = '#202f4a'
+        break;
+      case '11n':
+        color = '#0f1a2d'
+        break;
+      case '13n':
+        color = '#262b33'
+        break;
+      case '50n':
+        color = '#2d3440'
+        break;
+      default:
+        break;
+    }
+
+    setBackground(color)
+  }, [weatherIcon])
 
   const attWeather = useCallback(async () => {
     try {
@@ -86,7 +155,16 @@ function HomePage() {
   }, [attWeather])
 
   return (
-    <Container>
+    <Container
+      background={background}
+    >
+      <Box
+        position='absolute'
+        width='100%'
+        height='100%'
+        background='linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255,255,255,0.15) 100%)'
+        pointerEvents='none'
+      />
       {weather &&
         <>
           <Flex fontSize='10em' color='white'>
