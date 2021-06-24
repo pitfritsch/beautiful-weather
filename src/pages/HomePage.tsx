@@ -1,12 +1,10 @@
-import React, { useCallback, useMemo } from 'react'
-import { WiCloud, WiCloudy, WiDayCloudy, WiDayShowers, WiDaySunny, WiNightClear, WiNightCloudy, WiNightShowers, WiRainMix, WiSnow, WiThunderstorm } from "react-icons/wi";
-import { MdClear, MdPlace } from "react-icons/md";
-import { useEffect } from 'react';
-import { useState } from 'react';
-import useWeather, { IReturn } from '../hooks/useWeather';
-import styled from '@emotion/styled';
-import { Box, Button, Flex, IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { Box, Flex, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { MdClear, MdPlace } from "react-icons/md";
+import { WiCloud, WiCloudy, WiDayCloudy, WiDayShowers, WiDaySunny, WiNightClear, WiNightCloudy, WiNightShowers, WiRainMix, WiSnow, WiThunderstorm } from "react-icons/wi";
+import useWeather, { IReturn } from '../hooks/useWeather';
 
 
 const weatherToIcon: {
